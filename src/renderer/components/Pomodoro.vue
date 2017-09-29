@@ -23,6 +23,9 @@ export default {
             timeLeft: 0
         }
     },
+    mounted(){
+
+    },
     methods: {
         startTimer(){
             this.$store.commit('START_TIMER', { time: this.minutes })

@@ -9,10 +9,14 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
+// Import components
+import UsefulLinks from '@/components/UsefulLinks'
+Vue.component('useful-links', UsefulLinks)
+
 /* eslint-disable no-new */
 new Vue({
-  components: { App },
-  router,
-  store,
-  template: '<App/>'
+    components: { App },
+    router,
+    store,
+    template: '<App/>'
 }).$mount('#app')

@@ -5,9 +5,22 @@
 </template>
 
 <script>
-  export default {
-    name: 'lcars'
-  }
+import { shell } from 'electron'
+
+
+export default {
+    name: 'lcars',
+    mounted(){
+        //open links externally by default
+        document.addEventListener('click', evt => {
+            if(evt.target.hasAttribute('target') && event.target.getAttribute('target') == '_blank'){
+                evt.preventDefault()
+                console.log(shell)
+                shell.openExternal(evt.target.href);
+            }
+        })
+    }
+}
 </script>
 
 <style>
