@@ -15,7 +15,6 @@ export default {
         document.addEventListener('click', evt => {
             if(evt.target.hasAttribute('target') && event.target.getAttribute('target') == '_blank'){
                 evt.preventDefault()
-                console.log(shell)
                 shell.openExternal(evt.target.href);
             }
         })
@@ -23,9 +22,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 @import url('https://fonts.googleapis.com/css?family=Oswald');
+$mainFont: #FE9800;
 
 * {
     box-sizing: border-box;
@@ -33,17 +33,23 @@ export default {
     padding: 0;
 }
 
-body { font-family: 'Oswald', sans-serif; }
+body {
+    font-family: 'Oswald', sans-serif;
+    color: $mainFont;
+    text-transform: uppercase;
+}
+.lower {
+    text-transform: none;
+}
 
 #app {
     background:
-    radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
+    linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 1),
+        rgba(20, 15, 15, 1)
     );
     height: 100vh;
-    padding: 60px 80px;
     width: 100vw;
 }
 

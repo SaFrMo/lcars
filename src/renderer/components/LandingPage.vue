@@ -1,7 +1,10 @@
 <template>
 
     <div id="wrapper">
-        <h1>Good {{ salutation }}.</h1>
+        <div class="breadcrumb">
+            <h1>LCARS ACCESS 001</h1>
+            <h2 class="lower">Good {{ salutation }}.</h2>
+        </div>
 
         <nav>
             <ul>
@@ -36,6 +39,19 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+
+.breadcrumb {
+    text-align: right;
+    line-height: 1.2;
+    padding-top: 25px;
+
+    & h1 {
+        font-size: 50px;
+        line-height: 1;
+        margin-bottom: 5px;
+        font-weight: 400;
+    }
+}
 
 </style>
