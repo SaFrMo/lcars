@@ -2,14 +2,14 @@
 
     <div id="wrapper">
 
-        <div class="breadcrumb-wrap">
+        <header>
             <transition name="slide-rtl" appear>
                 <div class="breadcrumb">
                     <h1>LCARS ACCESS 001</h1>
                     <h2 class="lower">Good {{ salutation }}.</h2>
                 </div>
             </transition>
-        </div>
+        </header>
 
     </div>
 
@@ -35,7 +35,9 @@
 
 $violet: #9B98FE;
 
-.breadcrumb-wrap {
+header {
+    position: absolute;
+    right: 0;
     display: flex;
     justify-content: flex-end;
 }
@@ -56,7 +58,7 @@ $violet: #9B98FE;
     h2 {
         background-color: $violet;
         color: #000;
-        padding: 15px 15px 5px;
+        padding: 10px 15px 5px;
         border-radius: 30px 0 0 30px;
     }
 }

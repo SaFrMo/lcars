@@ -42,6 +42,27 @@ body {
 .lower {
     text-transform: none;
 }
+a {
+    color: #000;
+    text-decoration: none;
+    position: relative;
+}
+a::after {
+    content: '';
+    background-color: #000;
+    height: 15px;
+    width: 0;
+    display: inline-block;
+    margin-left: 5px;
+    position: relative;
+    top: 1px;
+
+    transition: width 0.4s;
+}
+a:hover::after,
+a:focus::after {
+    width: 15px;
+}
 
 #app {
     background:
