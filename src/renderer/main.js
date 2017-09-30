@@ -10,8 +10,8 @@ Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 // Import components
-import UsefulLinks from '@/components/UsefulLinks'
-Vue.component('useful-links', UsefulLinks)
+import NavBar from '@/components/NavBar'
+Vue.component('nav-bar', NavBar)
 
 /* eslint-disable no-new */
 new Vue({
