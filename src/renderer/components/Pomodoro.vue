@@ -20,6 +20,8 @@
 
 <script>
 
+import { ipcRenderer } from 'electron'
+
 export default {
     data(){
         return {
@@ -32,14 +34,19 @@ export default {
     },
     methods: {
         startTimer(){
-            this.$store.commit('START_TIMER', { time: this.minutes })
+            this.$store.commit('START_TIMER', { time: this.minutes / 10 })
 
             // kick loop
             requestAnimationFrame(this.updateTimer)
         },
         updateTimer(){
             this.timeLeft = this.$store.state.pomodoro.endTime - Date.now()
-            requestAnimationFrame(this.updateTimer)
+
+            if( this.timeLeft <= 0 ){
+                ipcRenderer.send('pomodoro-done')
+            } else {
+                requestAnimationFrame(this.updateTimer)
+            }
         }
     },
     computed: {
