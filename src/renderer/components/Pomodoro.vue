@@ -1,16 +1,20 @@
 <template>
 
-    <main>
+    <div class="wrap">
+        <transition name="slide-in" appear>
+            <main>
 
-        <router-link to="/">Home</router-link>
+                <router-link to="/">Home</router-link>
 
-        <input type="number" v-model.number="minutes" />
+                <input type="number" v-model.number="minutes" />
 
-        <button @click="startTimer">Start Timer</button>
+                <button @click="startTimer">Start Timer</button>
 
-        <h2>Time left: {{ minutesLeft }}:{{ secondsLeft }}</h2>
+                <h2>Time left: {{ minutesLeft }}:{{ secondsLeft }}</h2>
 
-    </main>
+            </main>
+        </transition>
+    </div>
 
 </template>
 
@@ -49,3 +53,30 @@ export default {
 }
 
 </script>
+
+<style lang="scss" scoped>
+
+$rose: #CC6061;
+
+.wrap {
+    position: absolute;
+    width: calc(100% - 180px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 180px;
+}
+main {
+    background-color: $rose;
+    color: #000;
+    padding: 50px;
+}
+.slide-in-enter-active, .slide-in-leave-active {
+    transition: transform 0.4s;
+}
+.slide-in-enter, .slide-in-leave-to {
+    transform: translateY(100vh);
+}
+
+</style>

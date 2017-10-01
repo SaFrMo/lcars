@@ -8,13 +8,13 @@ Vue.use(Router)
 export default new Router({
     routes: [
         {
-            path: '/',
+            path: '',
             name: 'landing-page',
             component: LandingPage
         },
         {
             path: '/pomodoro',
-            name: 'pomodoro',
+            name: '/pomodoro',
             component: Pomodoro
         },
         {

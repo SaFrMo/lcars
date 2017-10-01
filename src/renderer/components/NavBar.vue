@@ -2,6 +2,12 @@
 
     <div class="nav-bar">
         <nav>
+            <transition name="slide-down">
+                <div class="pod" v-if="$route.path != '/'">
+                    <router-link to="/">Home</router-link>
+                </div>
+            </transition>
+
             <div class="pod">
                 <h2>Utilities</h2>
                 <ul>
@@ -31,7 +37,7 @@
 class Link {
     constructor(name, path){
         this.name = name || 'default'
-        this.path = path || `./${ this.name.toLowerCase() }`
+        this.path = path || `/${ this.name.toLowerCase() }`
         this.external = external === null ? false : external
     }
 }
@@ -55,6 +61,7 @@ export default {
 
 $purple: #C498C4;
 $blue: #9B98FE;
+$rose: #CC6061;
 
 nav {
     display: inline-flex;
@@ -69,13 +76,20 @@ nav {
     margin: 10px 10px 0;
     font-size: 15px;
     background-color: $purple;
+    overflow: hidden;
 }
 .pod + .pod {
     padding: 10px 10px 30px;
     background-color: $blue;
 }
-.separator {
-
+.pod + .pod + .pod {
+    background-color: $rose;
+}
+.slide-down-enter-active, .slide-down-leave-active {
+    transition: transform 0.4s;
+}
+.slide-down-enter, .slide-down-leave-to {
+    transform: translateY(-100%);
 }
 
 </style>
