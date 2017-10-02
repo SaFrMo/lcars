@@ -25,6 +25,14 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="pod">
+                <h2>Misc</h2>
+                <ul>
+                    <li><a href="#" @click="awsSpot">Spot Request</a></li>
+                    <!-- <li><a href="#" @click="runAws('ec2-spot')">Standard Instance</a></li> -->
+                </ul>
+            </div>
         </nav>
 
         <div class="separator"></div>
@@ -33,6 +41,7 @@
 </template>
 
 <script>
+import { ipcRenderer } from 'electron'
 
 class Link {
     constructor(name, path){
@@ -51,6 +60,11 @@ export default {
             externalLinks: [
                 new Link('DeployHQ', 'https://funkhaus.deployhq.com/')
             ]
+        }
+    },
+    methods: {
+        awsSpot(){
+            ipcRenderer.send('ec2-spot')
         }
     }
 }

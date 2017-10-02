@@ -1,5 +1,6 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import notifier from 'node-notifier'
+import aws from './aws'
 
 /**
  * Set `__static` path to static files in production
@@ -33,8 +34,9 @@ function createWindow () {
 
 app.on('ready', createWindow)
 
-ipcMain.on('pomodoro-done', (evt, arg) => {
-    notifier.notify('Message');
+ipcMain.on('ec2-spot', (evt, arg) => {
+    aws.spot()
+    shell.openExternal('https://console.aws.amazon.com/ec2sp/v1/spot/home?region=us-east-1')
 })
 
 app.on('window-all-closed', () => {
