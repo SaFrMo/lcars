@@ -10,7 +10,7 @@
 
                 <button @click="startTimer">Start Timer</button>
 
-                <h2>Time left: {{ minutesLeft }}:{{ secondsLeft }}</h2>
+                <h2 v-if="running">Time left: {{ minutesLeft }}:{{ secondsLeft }}</h2>
 
             </main>
         </transition>
@@ -25,33 +25,43 @@ import { ipcRenderer } from 'electron'
 export default {
     data(){
         return {
+            timer: false,
+            lastTimestamp: 0,
             minutes: 25,
+            running: false,
             timeLeft: 0
         }
     },
-    mounted(){
-
-    },
     methods: {
         startTimer(){
-            this.$store.commit('START_TIMER', { time: this.minutes / 10 })
+            const ms = this.minutes * 60 * 1000
+            this.running = true
+            this.timeLeft = this.minutes
 
-            // kick loop
-            requestAnimationFrame(this.updateTimer)
+            this.timer = setTimeout(() => {
+                new Notification('Pomodoro done!')
+            }, ms)
+
+            this.timeLeft = ms
+            this.lastTimestamp = Date.now()
+
+            this.updateTimer()
         },
         updateTimer(){
-            this.timeLeft = this.$store.state.pomodoro.endTime - Date.now()
+            const now = Date.now()
+            this.timeLeft -= now - this.lastTimestamp
+            this.lastTimestamp = now
 
-            if( this.timeLeft <= 0 ){
-                ipcRenderer.send('pomodoro-done')
-            } else {
+            if( this.timeLeft > 0 ){
                 requestAnimationFrame(this.updateTimer)
+            } else {
+                this.running = false
             }
         }
     },
     computed: {
         minutesLeft(){
-            return Math.floor( this.timeLeft / 1000 / 60 )
+            return Math.floor( this.timeLeft / 1000 / 60 ) || 0
         },
         secondsLeft(){
             return String( Math.floor( this.timeLeft / 1000 % 60 ) ).padStart(2, '0')
